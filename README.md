@@ -8,7 +8,7 @@ Este repositório hospeda um E-book Dinâmico e Interativo desenvolvido durante 
 
 Diferente de arquivos PDF estáticos e tradicionais, este projeto utiliza tecnologias Web para criar uma experiência de leitura imersiva, simulando a sensação física de folhear um livro real (efeito Page Flip).
 
-O conteúdo do livro aborda os conceitos fundamentais, ferramentas e o impacto da Inteligência Artificial Generativa, consolidando o aprendizado obtido durante o bootcamp.
+O conteúdo do livro é composto por uma história infantil estilo paradidático com áudio de narração e imagens coloridas.
 
 🎯 O Desafio
 
