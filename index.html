@@ -15,6 +15,7 @@
 	<meta property="og:description" content="Esse e-book foi desenvolvimento do zero por mim com o uso de diversas inteligências artificiais e ferramentas: Canva, Chatgpt, Copilot, Runway, Elevenlabs, Leonardo.AI dentre outras" />
 	<meta name="Description" content="Esse e-book foi desenvolvimento do zero por mim com o uso de diversas inteligências artificiais e ferramentas: Canva, Chatgpt, Copilot, Runway, Elevenlabs, Leonardo.AI dentre outras">
 	<link rel="image_src" href="files/shot.png" />
+	<!-- OBS: removida tag <base> para evitar resolução incorreta de caminhos no servidor -->
 	<meta name="Generator" content="FlipPDFPlusCorp for win v6.12.19 at https://www.flipbuilder.com" />
 	<link href=style/app.css rel=preload as=style><link href=files/editor/files/config.js rel=preload as=script><link href=files/editor/files/textSvgConfig.js rel=preload as=script><link href=javascript/app.js rel=preload as=script><link href=javascript/chunk-vendors.js rel=preload as=script><link href=style/chunk-vendors.css rel=preload as=style>
                 <link rel="shortcut icon" href='files/extfile/htmlIcon.png' />
@@ -26,6 +27,9 @@
 
 <body>
 	<script src="javascript/jquery-3.5.1.min.js"></script>
+	<script src="files/editor/files/config.js"></script>
+	<script src="files/editor/files/textSvgConfig.js"></script>
+	<script src="javascript/config-sanitize.js"></script>
 	<script src="javascript/config.js"></script>
 	<script src="javascript/LoadingJS.js"></script>
 	<script src="javascript/main_preview.js"></script>
@@ -43,17 +47,45 @@
 	<link rel="stylesheet" href="style/player.css" />
 	<link rel="stylesheet" href="style/phoneTemplate.css" />
 	
-	
-	<script src="files/editor/files/config.js"></script><script src="files/editor/files/textSvgConfig.js"></script><script src="javascript/app.js"></script><script src="javascript/chunk-vendors.js"></script><link rel="stylesheet" href="style/app.css" /><link rel="stylesheet" href="style/chunk-vendors.css" >
+		<script src="javascript/app.js"></script>
+		<script src="javascript/chunk-vendors.js"></script>
+	<link rel="stylesheet" href="style/app.css" />
+	<link rel="stylesheet" href="style/chunk-vendors.css" >
                 <script src="javascript/pdf.js"></script>
                 <script>
-                    try {
-                        if (pdfjsLib) {
-                            pdfjsLib.GlobalWorkerOptions.workerSrc = "javascript/pdf.worker.js";
-                        }
-                    } catch (error) {
-                    }
+					try {
+						if (pdfjsLib) {
+							pdfjsLib.GlobalWorkerOptions.workerSrc = './javascript/pdf.worker.js';
+						}
+					} catch (error) {
+					}
                 </script>
+
+	<!-- Debug: mostra erros JS na página para facilitar diagnóstico (remover depois) -->
+	<div id="__debug_errors" style="position:fixed;left:8px;right:8px;bottom:8px;max-height:40vh;overflow:auto;background:rgba(0,0,0,0.85);color:#fff;padding:10px;border-radius:6px;z-index:99999;display:none;font-family:monospace;font-size:12px;">
+		<strong>Erros JS detectados:</strong>
+		<pre id="__debug_errors_pre" style="white-space:pre-wrap;margin-top:6px"></pre>
+	</div>
+	<script>
+		window.addEventListener('error', function (ev) {
+			var d = document.getElementById('__debug_errors');
+			var p = document.getElementById('__debug_errors_pre');
+			if (d && p) {
+				d.style.display = 'block';
+				p.textContent += (new Date()).toISOString() + " - " + (ev.message || ev.error || 'Unknown error') + "\n" + (ev.filename ? ev.filename + ':' + ev.lineno + ':' + ev.colno + '\n' : '') + (ev.error && ev.error.stack ? ev.error.stack + '\n' : '\n');
+			}
+			console && console.error && console.error(ev.error || ev.message);
+		});
+		window.addEventListener('unhandledrejection', function (ev) {
+			var d = document.getElementById('__debug_errors');
+			var p = document.getElementById('__debug_errors_pre');
+			if (d && p) {
+				d.style.display = 'block';
+				p.textContent += (new Date()).toISOString() + " - UnhandledRejection: " + (ev.reason && (ev.reason.message || ev.reason)) + '\n' + (ev.reason && ev.reason.stack ? ev.reason.stack + '\n' : '\n');
+			}
+			console && console.error && console.error('UnhandledRejection', ev.reason);
+		});
+	</script>
 	
 </body>
 
